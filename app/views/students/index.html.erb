@@ -1,1 +1,17 @@
 <h1>Welcome Students and Parents!</h1>
+
+<h4>Check out our current student roster!</h4>
+
+    <ul>
+        <% @students.each do |student|%>
+        <li>
+        <a href="/students/<%= student.id %>">
+            <%= student.name%>
+        </a>
+        </li>
+        <% end %>
+
+    </ul>
+
+    <h2>Looking for a tutor?</h2>
+    <h3><a href="/students/new">Sign Up Here!</a></h3>
