@@ -1,34 +1,38 @@
 class StudentsController < ApplicationController
     skip_before_action :verify_authenticity_token
-    before_action :find_student, only: [:show, :edit, :update]
+    before_action :find_student, only: [:show, :edit, :update, :destroy]
+    
+    #find student
+    def find_student
+        @student = Student.find(params[:id])
+    end
 
-
-    def index 
+    def index #NEEDS ALL STUDENTS
         @students = Student.all  
         
     end
 
-   #show
-    def show
+    #SHOW needs INSTANCE of logged STUDENT to display
+    def show 
         # @student = Student.find(params[:id])
     end
    
-    #new 
-    def new
+    #NEW - FORM needs INSTANCE of Student.NEW , for UPDATE ACTION to instanciate a new student
+    def new 
         @student = Student.new
         render :new
     end
     
-
-    def edit
-        # @student  = Student.find(params[:id])
-
+    #EDIT - FORM to take updated information for STUDENT:id pass it into UPDATE
+    def edit 
+        # @student  = Student.new
     end
-    #update
-    def update
+
+    #UPDATE takes PARMAMS from EDIT FORM and updates Student:id info
+    def update 
         # @student = Student.find(params[:id])
         @student.update(student_params)
-        redirect_to student_path(@student)
+        redirect_to @student
 
     end
     #create
@@ -41,10 +45,6 @@ class StudentsController < ApplicationController
 
 
 
-    #find student
-    def find_student
-        Student.find(params[:id])
-    end
 
 
 
